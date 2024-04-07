@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block nav %}
+<ul>
+    <li class="active"><a href="{% url 'home_page' %}">Home</a></li>
+    <!-- <li><a href="{% url 'about_us' %}">About</a></li> -->
+    <li><a href="{% url 'activity_list' %}">Activities</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'my_booking_view' %}">My Bookings</a></li>
+    {% endif %}
+    
+    <!-- <li><a href="./contact.html">Contacts</a></li> -->
+</ul>      
+{% endblock %}
+
+{% block content %}
+    <section class="hero-section set-bg" data-setbg="{% static 'img/hero-bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="hero-text">
+                        <span>FITNESS ELEMENTS</span>
+                        <h1>Gutim Sports Club</h1>
+                        <p>Gutim comes packed with the user-friendly BMI Calculator<br /> shortcode which lets</p>
+                        <a href="#" class="primary-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- About Section Begin -->
+    <section class="about-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-pic">
+                        <img src="{% static 'img/about-pic.jpg' %}" alt="">
+                        <a href="https://www.youtube.com/watch?v=SlPhMPnQ58k" class="play-btn video-popup">
+                            <img src="{% static 'img/play.png' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <h2>Story About Us</h2>
+                        <p class="first-para">Lorem ipsum proin gravida nibh vel velit auctor aliquet. Aenean pretium
+                            sollicitudin, nascetur auci elit consequat ipsutissem niuis sed odio sit amet nibh vulputate
+                            cursus a amet.</p>
+                        <p class="second-para">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, gravida
+                            quam semper libero sit amet. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
+                            rhoncus, gravida quam semper libero sit amet.</p>
+                        <a href="[% url 'about_us' %]" class="primary-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section End -->
+
+
+{% endblock %}

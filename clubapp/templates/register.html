@@ -1,0 +1,58 @@
+{% extends "auth_index.html" %}
+{% load static %}
+
+{% block nav %}
+<a href="{% url 'login_page' %}" class="primary-btn signup-btn">Login</a>                    
+{% endblock %}
+
+{% block content %}
+<section class="register-section spad" style="padding-bottom: 28vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="register-text">
+                    <div class="section-title">
+                        <h2>Register Now</h2>
+      
+                        {% if error %}
+                        <p style="color: red;">{{error}}</p>
+                        {% endif %}
+                    </div>
+                    <form method="post" class="register-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="name">Username</label>
+                                <input type="text" required name="username" id="name">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="email">Your email address</label>
+                                <input type="email" required name="email" id="email">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="last-name">Name</label>
+                                <input type="text" required name="name" id="last-name">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="password">password*</label>
+                                <input type="password" required id="password" name="password">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="password">confirm password*</label>
+                                <input type="password" required id="checkpassword" name="checkpassword">
+                            </div>
+                        </div>
+                        <button type="submit" class="register-btn">Get Started</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="register-pic" style="height: 100%;">
+                    <img style="height: 100%;" src="{% static 'img/register-pic.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+<!-- Register Section End -->

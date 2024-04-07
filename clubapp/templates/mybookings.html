@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block nav %}
+<ul>
+    <li class=""><a href="{% url 'home_page' %}">Home</a></li>
+    <!-- <li><a href="{% url 'about_us' %}">About</a></li> -->
+    <li><a href="{% url 'activity_list' %}">Activities</a></li>
+ 
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'my_booking_view' %}">My Bookings</a></li>
+    {% endif %}
+    <!-- <li><a href="./contact.html">Contacts</a></li> -->
+</ul>      
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb/classes-breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>My Bookings</h2>
+                        <div class="breadcrumb-option">
+                            <a href="{% url 'home_page' %}"><i class="fa fa-home"></i> Home</a>
+                            <span>MyBookings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="latest-blog-section recommend spad">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                   
+                </div>
+            </div>
+            
+            <div class="row">
+                {% for booking in booking_lst %}
+
+                <div class="col-lg-4">
+                    <div class="single-blog-item">
+                        <img src="{{booking.activity.activity_img.url}}" class="single-class-item set-bg" alt="">
+                        <div class="blog-widget">
+                            <div class="bw-date">{{booking.activity_slot}}</div>
+                            <div class="bw-date">{{booking.date_of_booking}}</div>
+
+                        </div>
+                        <h4><a href="#">{{booking.activity.activity_name}}</a></h4>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        
+    </section>
+
+
+{% endblock %}

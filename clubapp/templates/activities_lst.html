@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block nav %}
+<ul>
+    <li class=""><a href="{% url 'home_page' %}">Home</a></li>
+    <!-- <li><a href="{% url 'about_us' %}">About</a></li> -->
+    <li class="active"><a href="{% url 'activity_list' %}">Activities</a></li>
+
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'my_booking_view' %}">My Bookings</a></li>
+    {% endif %}
+    <!-- <li><a href="./contact.html">Contacts</a></li> -->
+</ul>      
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb/classes-breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Activites</h2>
+                        <div class="breadcrumb-option">
+                            <a href="{% url 'home_page' %}"><i class="fa fa-home"></i> Home</a>
+                            <span>Activity List</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <!-- Classes Section Begin -->
+    <section class="classes-section classes-page spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Activites We Provide</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for activity in activity_list %}
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'activity_detail' pk=activity.id %}">
+                        <div class="single-class-item set-bg" data-setbg="{{activity.activity_img.url}}">
+                            <div class="si-text">
+                                <h4>{{activity.activity_name}}</h4>
+                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+          
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Classes Section End -->
+
+
+{% endblock %}
