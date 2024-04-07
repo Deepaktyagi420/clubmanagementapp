@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from clubapp.models import ActivitiesModel, BookedActivity
 from django.contrib.auth import logout
 # Create your views here.
+from datetime import datetime
 
 from django.http import HttpResponse
 
@@ -52,7 +53,7 @@ class UserRegisterView(View):
         try:
             fst_name, lst_name = request.POST.get("name").split(" ")    
         except Exception:
-            fst_name, lst_name = request.POST.get("name"), None
+            fst_name, lst_name = request.POST.get("name"), "N.A"
         User.objects.create(username=request.POST.get("username"), email=request.POST.get("email"), first_name=fst_name, last_name=lst_name, password=request.POST.get("password"))
 
         return redirect("login_page")
@@ -76,18 +77,27 @@ class ActivityDetailView(View):
     context = {}
     def get(self, request, pk, *args, **kwargs):
         activity_details = ActivitiesModel.objects.filter(id=pk).values().first()
-        return render(request, template_name="activity_detail.html", context={"detail":activity_details})
+        context={"detail":activity_details}
+        return render(request, template_name="activity_detail.html", context=context)
 
     def post(self, request, pk, *args, **kwargs):
         activity = ActivitiesModel.objects.filter(id=pk).first()
         try:
+            date_of_booking = request.POST.get("date")
+            date_of_booking = datetime.strptime(date_of_booking, '%Y-%m-%d')
+            if date_of_booking <= datetime.now():
+                activity_details = ActivitiesModel.objects.filter(id=pk).values().first()
+                context={"detail":activity_details}
+                context.update({"error":"Invalid date"})
+                return render(request, template_name="activity_detail.html", context=context)
+
             BookedActivity.objects.create(user=request.user, activity=activity, activity_slot=request.POST.get("time_frame"), date_of_booking=request.POST.get("date"))
         except Exception as e:
             tt="TT"
-
-        url = reverse('activity_detail', kwargs={'pk':pk})
+        url = reverse('my_booking_view')
         return redirect(url)
     
+
 class MyBookingsView(View):
     def get(self, request, pk=None, *args, **kwargs):
         activties = BookedActivity.objects.filter(user=request.user)
