@@ -53,7 +53,7 @@ class UserRegisterView(View):
             fst_name, lst_name = request.POST.get("name").split(" ")    
         except Exception:
             fst_name, lst_name = request.POST.get("name"), None
-        User.objects.create(username=request.POST.get("username"), email=request.POST.get("email"), first_name=request.POST.get("name").split(" ")[0], last_name=request.POST.get("name").split(" ")[1], password=request.POST.get("password"))
+        User.objects.create(username=request.POST.get("username"), email=request.POST.get("email"), first_name=fst_name, last_name=lst_name, password=request.POST.get("password"))
 
         return redirect("login_page")
 
