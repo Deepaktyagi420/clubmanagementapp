@@ -45,7 +45,14 @@ class UserRegisterView(View):
         
         if User.objects.filter(username=request.POST.get("username")).exists():
             return render(request, template_name="register.html", context={"error":"user already exists"})
-        
+
+        if not request.POST.get("name") or not request.POST.get("username") or not request.POST.get("email") or not request.POST.get("password"):
+            return render(request, template_name="register.html", context={"error":"Please fill all fields"})
+
+        try:
+            fst_name, lst_name = request.POST.get("name").split(" ")    
+        except Exception:
+            fst_name, lst_name = request.POST.get("name"), None
         User.objects.create(username=request.POST.get("username"), email=request.POST.get("email"), first_name=request.POST.get("name").split(" ")[0], last_name=request.POST.get("name").split(" ")[1], password=request.POST.get("password"))
 
         return redirect("login_page")
