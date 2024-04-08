@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+
+{% block nav %}
+<ul>
+    <li class="active"><a href="{% url 'home_page' %}">Home</a></li>
+    <!-- <li><a href="{% url 'about_us' %}">About</a></li> -->
+    <li><a href="{% url 'activity_list' %}">Activities</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'my_booking_view' %}">My Bookings</a></li>
+    {% endif %}
+    
+    <!-- <li><a href="./contact.html">Contacts</a></li> -->
+</ul>      
+{% endblock %}
+
+{% block content %}
+<section class="register-section spad" style="padding-bottom: 28vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="register-text">
+                    <div class="section-title">
+                        <h2>Register Now</h2>
+      
+                        {% if error %}
+                        <p style="color: red;">{{error}}</p>
+                        {% endif %}
+                    </div>
+                    <form method="post" class="register-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="name">Username</label>
+                                <input type="text" required name="username" id="name" value="{{user_obj.username}}">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="email">Your email address</label>
+                                <input type="email" required name="email" id="email" value="{{user_obj.email}}">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="last-name">Name</label>
+                                <input type="text" required name="name" value="{{user_obj.first_name}}" id="last-name">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="password">password*</label>
+                                <input type="password" required id="password" value="{{user_obj.password}}" name="password">
+                            </div>
+                
+                        </div>
+                        <button type="submit" class="register-btn">Update details</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="register-pic" style="height: 100%;">
+                    <img style="height: 100%;" src="{% static 'img/register-pic.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+<!-- Register Section End -->
