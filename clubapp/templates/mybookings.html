@@ -46,15 +46,18 @@
                 {% for booking in booking_lst %}
 
                 <div class="col-lg-4">
-                    <div class="single-blog-item">
-                        <img src="{{booking.activity.activity_img.url}}" class="single-class-item set-bg" alt="">
-                        <div class="blog-widget">
-                            <div class="bw-date">{{booking.activity_slot}}</div>
-                            <div class="bw-date">{{booking.date_of_booking}}</div>
-
+                    <a href="{% url 'booking_details' pk=booking.id %}">
+                        <div class="single-blog-item">
+                            <img src="{{booking.activity.activity_img.url}}" class="single-class-item set-bg" alt="">
+                            <div class="blog-widget">
+                      
+                                <div class="bw-date">{{booking.activity_slot}}</div>
+                                <div class="bw-date">{{booking.date_of_booking}}</div>
+    
+                            </div>
+                            <h4><a href="#">{{booking.activity.activity_name}}</a></h4>
                         </div>
-                        <h4><a href="#">{{booking.activity.activity_name}}</a></h4>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
             </div>
