@@ -4,13 +4,11 @@
 {% block nav %}
 <ul>
     <li class=""><a href="{% url 'home_page' %}">Home</a></li>
-    <!-- <li><a href="{% url 'about_us' %}">About</a></li> -->
     <li><a href="{% url 'activity_list' %}">Activities</a></li>
  
     {% if user.is_authenticated %}
     <li><a href="{% url 'my_booking_view' %}">My Bookings</a></li>
     {% endif %}
-    <!-- <li><a href="./contact.html">Contacts</a></li> -->
 </ul>      
 {% endblock %}
 
