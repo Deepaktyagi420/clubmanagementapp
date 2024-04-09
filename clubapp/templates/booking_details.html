@@ -4,12 +4,10 @@
 {% block nav %}
 <ul>
     <li class=""><a href="{% url 'home_page' %}">Home</a></li>
-    <!-- <li><a href="{% url 'about_us' %}">About</a></li> -->
     <li class="active"><a href="{% url 'activity_list' %}">Activities</a></li>
     {% if user.is_authenticated %}
     <li><a href="{% url 'my_booking_view' %}">My Bookings</a></li>
     {% endif %}
-    <!-- <li><a href="./contact.html">Contacts</a></li> -->
 </ul>      
 {% endblock %}
 <style>
@@ -48,9 +46,6 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="about-pic">
-   
-                            <!-- <img src="{{detail.activity_img}}" alt="" style="width: 200px; height: 200px;"> -->
-                      
                             <h3 class="mt-4">{{detail.activity_name}}</h3>
                        
                         </div>
